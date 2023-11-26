@@ -8,7 +8,7 @@ import cookieParser from "cookie-parser";
 
 mongoose.connect("mongodb://localhost:27017",{dbName: "fullstack"}).then(()=>console.log("Database Connected"))
 
-
+//
 const messageSchema = new mongoose.Schema({
     name: String,
     email: String,
