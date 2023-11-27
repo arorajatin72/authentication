@@ -1,14 +1,14 @@
-import path from "path";
-import bcrypt from "bcrypt";
-import express from "express";
-import jwt from "jsonwebtoken"
-import mongoose from "mongoose";
+import path from "path"; //handling paths
+import bcrypt from "bcrypt"; //password hashing
+import express from "express"; // web-app framework
+import jwt from "jsonwebtoken" // user authentication
+import mongoose from "mongoose"; // object modeling
 import { urlencoded } from "express";
 import cookieParser from "cookie-parser";
 
-mongoose.connect("mongodb://localhost:27017",{dbName: "fullstack"}).then(()=>console.log("Database Connected"))
+mongoose.connect("mongodb://localhost:27017",{dbName: "fullstack"}).then(()=>console.log("Database Connected")) // Database connection
 
-
+//Defining MongoDB Schemas and Models
 const messageSchema = new mongoose.Schema({
     name: String,
     email: String,
@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema({
 const Message = mongoose.model("Message",messageSchema)
 const User = mongoose.model("User", userSchema);
 
+// Setting up express application
 const app = express();
 
 
@@ -32,7 +33,7 @@ app.use(cookieParser());
 
 app.set("view engine", "ejs")
 
-
+//Authentication Middleware
 const isAuthenticated = async (req,res,next)=>{
     // Extract the "token" cookie from the request
     const {token} = req.cookies;
